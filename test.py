@@ -26,7 +26,7 @@ def v2ex():
 @retry(stop_max_attempt_number=5)
 def tieba():
     try:
-        driver = webdriver.Chrome()
+        driver = get_web_driver()
         driver.get("https://tieba.baidu.com/index.html")
         driver.find_element_by_xpath("//*[@id='com_userbar']/ul/li[4]/div/a").click()
         time.sleep(1)
