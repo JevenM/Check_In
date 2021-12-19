@@ -29,7 +29,6 @@ def tieba():
         driver = get_web_driver()
         driver.get("https://tieba.baidu.com/index.html")
         driver.find_element_by_xpath("//*[@id='com_userbar']/ul/li[4]/div/a").click()
-        time.sleep(1)
         driver.find_element_by_xpath("//*[@id='TANGRAM__PSP_4__footerULoginBtn']").click()
         time.sleep(1)
         driver.find_element_by_xpath("//*[@id='TANGRAM__PSP_4__userName']").send_keys(username)
