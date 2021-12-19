@@ -13,8 +13,9 @@ def moyupai():
         driver.find_element_by_xpath("//*[@id='loginPassword']").send_keys(password)
         driver.find_element_by_xpath("//*[@class='green']").click()
 
-        driver.find_element_by_xpath("//*[@id='yesterday']").click()
-        print('moyupai签到成功')
+        if driver.find_element_by_xpath("//*[@id='yesterday']") !=[]:
+            driver.find_element_by_xpath("//*[@id='yesterday']").click()
+            print('moyupai签到成功')
     except:
         raise
     finally:
