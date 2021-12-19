@@ -12,7 +12,7 @@ def v2ex():
         driver.find_element_by_xpath("//*[@placeholder='用户名或电子邮箱地址']").send_keys(username)
         driver.find_element_by_xpath("//*[@type='password']").send_keys(password) 
         valid = Ocr_Captcha(driver, "//input[starts-with(@style,'background-image')]", img_path) # 验证码识别
-        driver.find_element_by_xpath("//*[@placeholder='请输入上图中的验证码']").send_keys(password)
+        driver.find_element_by_xpath("//*[@placeholder='请输入上图中的验证码']").send_keys(valid)
         driver.find_element_by_xpath("//*[@type='submit']").click()
 
         time.sleep(2)
