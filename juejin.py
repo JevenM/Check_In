@@ -44,7 +44,10 @@ def juejin():
         if driver.find_elements_by_xpath("//*[@class='signin btn']") != []:
             driver.find_element_by_xpath("//*[@class='signin btn']").click()
             time.sleep(2)
+            driver.find_element_by_xpath("//*[@id=‘juejin’]/div[1]/main/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/button").click()
             print("JueJin签到成功")
+        else:
+            print("JueJin已经签到")
     except:
         raise
     finally:

@@ -16,6 +16,8 @@ def moyupai():
         if driver.find_element_by_xpath("//*[@id='yesterday']") !=[]:
             driver.find_element_by_xpath("//*[@id='yesterday']").click()
             print('moyupai签到成功')
+        else:
+            print('moyupai已经签到')
     except:
         raise
     finally:
