@@ -22,9 +22,9 @@ def ruisi():
         time.sleep(4)
         driver.get("http://rs.xidian.edu.cn/plugin.php?id=dsu_paulsign:sign")
 
-        driver.find_element_by_xpath("//*[@id='kx']").click()
-        
-        driver.find_element_by_xpath("//*[@id='todaysay']").send_keys("Hello World!")
+        if driver.find_element_by_xpath("//*[@id='kx']") !=[]:
+            driver.find_element_by_xpath("//*[@id='kx']").click()
+            driver.find_element_by_xpath("//*[@id='todaysay']").send_keys("Hello World!")
 
         if driver.find_element_by_xpath("//*[@id='qiandao']/table[1]/tbody/tr/td/div/a") !=[]:
             driver.find_element_by_xpath("//*[@id='qiandao']/table[1]/tbody/tr/td/div/a").click()
