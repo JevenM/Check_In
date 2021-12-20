@@ -4,18 +4,20 @@ username = sys.argv[1] # 登录账号
 password = sys.argv[2] # 登录密码
 img_path = os.getcwd() + "/1.png"
 
+
+# 本地测试，在anaconda中的base环境安装相应的库，然后执行，成功签到
 @retry(stop_max_attempt_number=5)
 def ruisi():
     try:
         driver = get_web_driver()
         driver.get("http://rs.xidian.edu.cn/member.php?mod=logging&action=login")
-        driver.find_element_by_xpath("//*[@id='username_LV9uo']").send_keys(username)
-        driver.find_element_by_xpath("//*[@id='password3_LV9uo']").send_keys(password)
+        driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/div[1]/table/tbody/tr/td[1]/input").send_keys(username)
+        driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/div[2]/table/tbody/tr/td[1]/input").send_keys(password)
 
-        valid = Ocr_Captcha(driver, "//*[@id='vseccode_cSgPZzqZ']/img", img_path) # 验证码识别
-
-        driver.find_element_by_xpath("//*[@id='seccodeverify_cSgPZzqZ']").send_keys(valid)
-        driver.find_element_by_xpath("//*[@id='loginform_LV9uo']/div/div[6]/table/tbody/tr/td[1]/button").click()
+        valid = Ocr_Captcha(driver, "/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/span/div/table/tbody/tr/td/span[2]/img", img_path) # 验证码识别
+        print(valid)
+        driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/span/div/table/tbody/tr/td/input").send_keys(valid)
+        driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/div[6]/table/tbody/tr/td[1]/button").click()
 
         time.sleep(4)
         driver.get("http://rs.xidian.edu.cn/plugin.php?id=dsu_paulsign:sign")

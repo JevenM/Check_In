@@ -5,7 +5,10 @@
 - muacloud.py 保存了[muacloud](https://muacloud.cloud/)网站自动签到脚本
 - gamekegs.py 保存了[gamekegs](https://gamekegs.com/)网站自动签到脚本
 - juejin.py 保存了[掘金](https://juejin.cn/)网站自动签到脚本
-- 91.py保存了[91tvg](https://www.91tvg.com/)网站自动签到脚本
+- 91.py 保存了[91tvg](https://www.91tvg.com/)网站自动签到脚本
+- ruisi.py 保存了[西电睿思](http://rs.xidian.edu.cn/plugin.php?id=dsu_paulsign:sign)网站自动签到脚本
+- tieba.py 保存了[百度贴吧](https://tieba.baidu.com/index.html)网站自动签到脚本，失败
+- niuke.py 保存了[牛客网](https://www.nowcoder.com/)网站自动打卡脚本，失败
 
 ### 使用方法
 

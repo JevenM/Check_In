@@ -16,7 +16,8 @@ chrome_options.add_argument('--disable-gpu') # 谷歌文档提到需要加上这
 chrome_options.add_argument('--headless') # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
 
 def get_web_driver():
-    chromedriver = "/usr/bin/chromedriver"
+    # chromedriver = "/usr/bin/chromedriver"
+    chromedriver = "chromedriver"
     os.environ["webdriver.chrome.driver"] = chromedriver
     driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chrome_options)
     driver.implicitly_wait(10) # 所有的操作都可以最长等待10s
