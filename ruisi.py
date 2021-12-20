@@ -6,6 +6,7 @@ img_path = os.getcwd() + "/1.png"
 
 
 # 本地测试，在anaconda中的base环境安装相应的库，然后执行，成功签到
+# 在github上不行，卡死timeout
 @retry(stop_max_attempt_number=5)
 def ruisi():
     try:
