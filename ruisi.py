@@ -35,6 +35,7 @@ def ruisi():
             else:
                 print("ruisi签到失败")
     except:
+        print("ruisi签到异常")
         raise
     finally:
         driver.quit()

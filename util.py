@@ -307,8 +307,6 @@ class CrackSlider:
         return loc[1][0]
 
     def crack_slider(self):
-        pre = self.driver.current_url
-        print(self.driver.current_url)
         slider = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'yidun_slider')))
         ActionChains(self.driver).click_and_hold(slider).perform()
         print("sum(tracks['forward_tracks']): ", sum(self.tracks['forward_tracks']))
@@ -328,20 +326,6 @@ class CrackSlider:
         ActionChains(self.driver).release().perform()
         # 必须等待两秒，不然获得不了下面的value值
         time.sleep(2)
-        now = self.driver.current_url
-        print(self.driver.current_url)
-        try:
-            if pre == now:
-                # 背景会变化，需要重新下载图片
-                self.unsuccess += 1
-                print("失败！次数: ", self.unsuccess)
-                if self.unsuccess <= 3:
-                    self.begin()
-            else:
-                self.success += 1
-                print("成功！次数: ", self.success)
-        except:
-            raise
 
     def begin(self):
         self.get_pic()

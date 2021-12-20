@@ -59,12 +59,10 @@ def niuke():
         time.sleep(4)
         driver.get("https://www.nowcoder.com/ta/huawei")
 
-        if driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a") !=[]:
-            driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
-            print('niuke签到成功')
-        else:
-            print("niuke签到失败")
+        driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
+        print('niuke签到成功')
     except:
+        print("niuke签到失败")
         raise
     finally:
         driver.quit()
