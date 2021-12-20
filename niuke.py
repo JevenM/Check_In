@@ -12,7 +12,7 @@ def Sliding_Captcha(driver):
     slide_url = slide_img.get_attribute("src")
     backgroud_url = backgroud_img.get_attribute("src")
     
-    track = Track()
+    track = CrackSlider()
     result = track.get_track(slide_url, backgroud_url)
 
     verify_div = driver.find_element(By.XPATH, '''/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[2]''')
@@ -33,11 +33,28 @@ def niuke():
     try:
         driver = get_web_driver()
         driver.get("https://www.nowcoder.com/login")
+
+        time.sleep(1)
+        path2 = self.driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/div[1]/ul/li[2]")
+        path3 = self.driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/div[1]/ul/li[3]")
+
+        # 先切换class的active状态
+        driver.execute_script("arguments[0].setAttribute(arguments[1],arguments[2])", path2, 'class','tab-item')
+        driver.execute_script("arguments[0].setAttribute(arguments[1],arguments[2])", path3, 'class','tab-item active')
+        
+        # 点击切换tab
+        js = 'document.querySelector("body > div.nk-container > div.account-form-wrapper > div > div.flex-auto.plr-15.pt-5.pb-6 > div:nth-child(2) > div.txt-center.mb-8 > ul > li.tab-item.active").click();'
+        driver.execute_script(js)
+
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/form/div[1]/div/div/input").send_keys(username)
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/form/div[2]/div/div/input").send_keys(password)
+        
+        # 点击登录，弹出滑动验证码
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/form/button").click()
-
-        Sliding_Captcha(driver) # 验证码处理，需要重新为网易易盾编写破解程序，未完成
+        
+        # 验证码处理，需要重新为网易易盾编写破解程序
+        track = CrackSlider(driver) 
+        track.begin()
 
         time.sleep(4)
         driver.get("https://www.nowcoder.com/profile/462482432")
