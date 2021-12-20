@@ -157,8 +157,9 @@ class CrackSlider:
         # 不加这一行说明chrome.exe的位置会报错
         # options.binary_location = r"D:\\Google\Chrome\\Application\chrome.exe"
         #self.driver = webdriver.Chrome(chrome_options=options)
-        #self.wait = WebDriverWait(self.driver, 20)
         self.driver = driver
+        self.wait = WebDriverWait(self.driver, 20)
+        
         self.zoom = 1
         self.tracks = {}
         self.success = 0
@@ -306,6 +307,8 @@ class CrackSlider:
         return loc[1][0]
 
     def crack_slider(self):
+        pre = self.driver.current_url
+        print(self.driver.current_url)
         slider = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'yidun_slider')))
         ActionChains(self.driver).click_and_hold(slider).perform()
         print("sum(tracks['forward_tracks']): ", sum(self.tracks['forward_tracks']))
@@ -325,23 +328,26 @@ class CrackSlider:
         ActionChains(self.driver).release().perform()
         # 必须等待两秒，不然获得不了下面的value值
         time.sleep(2)
+        now = self.driver.current_url
+        print(self.driver.current_url)
         try:
-            self.driver.find_element_by_xpath(
-                "/html/body/main/div[1]/div/div[2]/div[2]/div[1]/div[3]/div/div/div[3]/div[2]/div/div/div[2]/div/div[2]/div[3]/span[2]").text==""
-            # 背景会变化，需要重新下载图片
-            self.success += 1
-            print("成功！次数: ", self.success)
+            if pre == now:
+                # 背景会变化，需要重新下载图片
+                self.unsuccess += 1
+                print("失败！次数: ", self.unsuccess)
+                if self.unsuccess <= 3:
+                    self.begin()
+            else:
+                self.success += 1
+                print("成功！次数: ", self.success)
         except:
-            self.unsuccess += 1
-            print("失败！次数: ", self.unsuccess)
-            if self.unsuccess <= 5:
-                self.begin()
+            raise
 
     def begin(self):
         self.get_pic()
         distance = self.match(self.targname, self.tempname)
         print("zoom： %f" % self.zoom)
-        self.tracks = self.get_tracks((distance + 7) * cs.zoom)  # 对位移的缩放计算
+        self.tracks = self.get_tracks((distance + 7) * self.zoom)  # 对位移的缩放计算
         self.crack_slider()
 
 
