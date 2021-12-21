@@ -28,7 +28,7 @@ def Sliding_Captcha(driver):
     ActionChains(driver).release(on_element=verify_div).perform()
     time.sleep(10)
 
-@retry(stop_max_attempt_number=5)
+@retry(stop_max_attempt_number=1)
 def niuke():
     try:
         driver = get_web_driver()
@@ -60,6 +60,8 @@ def niuke():
         driver.get("https://www.nowcoder.com/ta/huawei")
 
         driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
+
+        # TODO 下面还有一个按钮需要点击
         print('niuke签到成功')
     except:
         print("niuke签到失败")

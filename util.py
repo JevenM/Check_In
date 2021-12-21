@@ -338,8 +338,7 @@ class CrackSlider:
         time.sleep(0.5)
         # 释放hold操作
         ActionChains(self.driver).release().perform()
-        # 必须等待两秒，不然获得不了下面的value值
-        time.sleep(2)
+        # time.sleep(2)
 
     def begin(self):
         self.get_pic()
