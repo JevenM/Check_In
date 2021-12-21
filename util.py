@@ -188,10 +188,14 @@ class CrackSlider:
         # presence_of_element_located 
         # presence_of_all_elements_located
         time.sleep(2)
-        target = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_bg-img')))
-        template = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_jigsaw')))
-        target_link = target.get_attribute('src')
-        template_link = template.get_attribute('src')
+        # target = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_bg-img')))
+        # template = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_jigsaw')))
+
+        slide_img = self.driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[2]")
+        backgroud_img = self.driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[1]")
+        
+        target_link = backgroud_img.get_attribute('src')
+        template_link = slide_img.get_attribute('src')
         target_img = Image.open(BytesIO(requests.get(target_link).content))
         template_img = Image.open(BytesIO(requests.get(template_link).content))
         self.targname = "target_demo.jpg"

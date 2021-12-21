@@ -5,34 +5,11 @@ password = sys.argv[2] # 登录密码
 img_path = os.getcwd() + "/1.png"
 
 
-def Sliding_Captcha(driver):
-    # 获取验证图片
-    slide_img = driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[2]")
-    backgroud_img = driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[1]")
-    slide_url = slide_img.get_attribute("src")
-    backgroud_url = backgroud_img.get_attribute("src")
-    
-    track = CrackSlider()
-    result = track.get_track(slide_url, backgroud_url)
-
-    verify_div = driver.find_element(By.XPATH, '''/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[2]''')
-
-    # 按下鼠标左键
-    ActionChains(driver).click_and_hold(verify_div).perform()
-    time.sleep(0.5)
-    # 遍历轨迹进行滑动
-    for t in result:
-        time.sleep(0.01)
-        ActionChains(driver).move_by_offset(xoffset=t, yoffset=0).perform()
-    # 释放鼠标
-    ActionChains(driver).release(on_element=verify_div).perform()
-    time.sleep(10)
-
 @retry(stop_max_attempt_number=1)
 def niuke():
     try:
         driver = get_web_driver()
-        driver.get("https://www.nowcoder.com/login")
+        driver.get("https://www.nowcoder.com/login?callBack=https://www.nowcoder.com/ta/huawei")
 
         time.sleep(1)
         path2 = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/div[2]/div[2]/div[1]/ul/li[2]")
@@ -59,13 +36,15 @@ def niuke():
         time.sleep(4)
         driver.get("https://www.nowcoder.com/ta/huawei")
 
-        driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
+        try:
+            driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
 
-        # TODO 下面还有一个按钮需要点击
-        print('niuke签到成功')
+            # TODO 下面还有一个按钮需要点击
+            print('niuke签到成功')
+        except:
+            print('niuke签到失败')
     except:
-        print("niuke签到失败")
-        raise
+        print("niuke签到异常")
     finally:
         driver.quit()
 
