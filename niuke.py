@@ -63,6 +63,7 @@ def niuke():
         print('niuke签到成功')
     except:
         print("niuke签到失败")
+        raise
     finally:
         driver.quit()
 

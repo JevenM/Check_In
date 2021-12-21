@@ -17,6 +17,11 @@ chrome_options.add_argument('--no-sandbox') # 解决DevToolsActivePort文件不�
 chrome_options.add_argument('window-size=1920x1080') # 指定浏览器分辨率
 chrome_options.add_argument('--disable-gpu') # 谷歌文档提到需要加上这个属性来规避bug
 chrome_options.add_argument('--headless') # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
+chrome_options.add_argument("--disable-extensions")
+chrome_options.add_argument("--no-sandbox") # linux only
+chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+chrome_options.add_experimental_option("useAutomationExtension", False)
+
 
 def get_web_driver():
     # chromedriver = "/usr/bin/chromedriver"
@@ -24,6 +29,15 @@ def get_web_driver():
     os.environ["webdriver.chrome.driver"] = chromedriver
     driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chrome_options)
     driver.implicitly_wait(10) # 所有的操作都可以最长等待10s
+    driver.execute_cdp_cmd("Network.enable", {})
+    driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers": {"User-Agent": "browserClientA"}})
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": """
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => undefined
+            })
+        """
+    })
     return driver
 
 # 一直等待某元素可见，默认超时10秒（此函数暂时没有使用）
