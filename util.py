@@ -354,10 +354,11 @@ class CrackSlider:
     def begin(self):
         self.get_pic()
         if self.flag:
-            return
+            return False
         distance = self.match(self.targname, self.tempname)
         print("zoom： %f" % self.zoom)
         self.tracks = self.get_tracks((distance + 7) * self.zoom)  # 对位移的缩放计算
         self.crack_slider()
+        return True
 
 

@@ -31,7 +31,10 @@ def niuke():
         
         # 验证码处理，需要重新为网易易盾编写破解程序
         track = CrackSlider(driver) 
-        track.begin()
+        f = track.begin()
+        if f is False:
+            print("结束")
+            return
 
         time.sleep(4)
         driver.get("https://www.nowcoder.com/ta/huawei")
