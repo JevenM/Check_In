@@ -25,19 +25,14 @@ def ruisi():
 
         if driver.find_element_by_xpath("/html/body/div[7]/div[2]/div[1]/h1[1]").text == "您今天已经签到过了或者签到时间还未开始":
             print("您今天已经签到过了或者签到时间还未开始")
-        else:
-            if driver.find_element_by_xpath("//*[@id='kx']") !=[]:
-                driver.find_element_by_xpath("//*[@id='kx']").click()
-                driver.find_element_by_xpath("//*[@id='todaysay']").send_keys("Hello World!")
-
-            if driver.find_element_by_xpath("//*[@id='qiandao']/table[1]/tbody/tr/td/div/a") !=[]:
-                driver.find_element_by_xpath("//*[@id='qiandao']/table[1]/tbody/tr/td/div/a").click()
-                print('ruisi签到成功')
-            else:
-                print("ruisi签到失败")
+        
     except:
-        print("ruisi签到异常")
-        raise
+        # 说明未签到
+        driver.find_element_by_xpath("//*[@id='kx']").click()
+        driver.find_element_by_xpath("//*[@id='todaysay']").send_keys("Hello World!")
+
+        driver.find_element_by_xpath("//*[@id='qiandao']/table[1]/tbody/tr/td/div/a").click()
+        print('ruisi签到成功')
     finally:
         driver.quit()
 

@@ -38,13 +38,16 @@ def niuke():
 
         try:
             driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
-
-            # TODO 下面还有一个按钮需要点击
+            time.sleep(1)
+            driver.find_element_by_xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div[3]/button").click()
+            
             print('niuke签到成功')
         except:
             print('niuke签到失败')
+            raise
     except:
         print("niuke签到异常")
+        raise
     finally:
         driver.quit()
 

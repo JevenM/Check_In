@@ -180,6 +180,7 @@ class CrackSlider:
         self.unsuccess = 0
         self.targname = ''
         self.tempname = ''
+        self.flag = False
 
     def get_pic(self):
         # 定位到的第一个元素即可，即使页面有多个class也不怕
@@ -190,21 +191,27 @@ class CrackSlider:
         time.sleep(2)
         # target = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_bg-img')))
         # template = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_jigsaw')))
-
-        slide_img = self.driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[2]")
-        backgroud_img = self.driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div/div/div/div[1]/div/div[1]/img[1]")
+        try:
+            
+            backgroud_img = self.driver.find_element_by_xpath("//*[@class='yidun_bg-img']")
+            slide_img = self.driver.find_element_by_xpath("//*[@class='yidun_jigsaw']")
+        except:
+            self.flag = True
+            print("没有图片，直接跳转")
+            return
         
         target_link = backgroud_img.get_attribute('src')
         template_link = slide_img.get_attribute('src')
         target_img = Image.open(BytesIO(requests.get(target_link).content))
         template_img = Image.open(BytesIO(requests.get(template_link).content))
-        self.targname = "target_demo.jpg"
+        self.targname = "target_demo.png"
         self.tempname = 'template_demo.png'
         target_img.save(self.targname)
         template_img.save(self.tempname)
         local_img = Image.open(self.targname)
         size_loc = local_img.size
-        self.zoom = 320 / int(size_loc[0])
+        print(size_loc[0])
+        self.zoom = 260 / int(size_loc[0])
 
     # def get_tracks(self, distance):
     #     print("distance： %f" % distance)
@@ -346,6 +353,8 @@ class CrackSlider:
 
     def begin(self):
         self.get_pic()
+        if self.flag:
+            return
         distance = self.match(self.targname, self.tempname)
         print("zoom： %f" % self.zoom)
         self.tracks = self.get_tracks((distance + 7) * self.zoom)  # 对位移的缩放计算
