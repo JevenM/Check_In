@@ -37,11 +37,14 @@ def niuke():
         driver.get("https://www.nowcoder.com/ta/huawei")
 
         try:
-            driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
-            time.sleep(1)
-            driver.find_element_by_xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div[3]/button").click()
+            if driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").text == "已打卡":
+                print("牛客已打卡")
+            else:
+                driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[4]/div[1]/div[1]/a").click()
+                time.sleep(1)
+                driver.find_element_by_xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div[3]/button").click()
             
-            print('niuke签到成功')
+                print('niuke签到成功')
         except:
             print('niuke签到失败')
             raise
