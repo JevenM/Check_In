@@ -193,8 +193,8 @@ class CrackSlider:
         # template = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_jigsaw')))
         try:
             
-            backgroud_img = self.driver.find_element_by_xpath("//*[@class='yidun_bg-img']")
-            slide_img = self.driver.find_element_by_xpath("//*[@class='yidun_jigsaw']")
+            backgroud_img = self.driver.find_element_by_xpath("//*[@class='yidun_bg-img']")[0]
+            slide_img = self.driver.find_element_by_xpath("//*[@class='yidun_jigsaw']")[0]
         except:
             self.flag = True
             print("没有图片，直接跳转")
