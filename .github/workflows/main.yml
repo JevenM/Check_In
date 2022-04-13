@@ -43,5 +43,5 @@ jobs:
           python ./moyupai.py  ${{ secrets.MOYUPAI_USERNAME }} ${{ secrets.MOYUPAI_PASSWORD }}
           # python ./v2ex.py  ${{ secrets.V2EX_USERNAME }} ${{ secrets.V2EX_PASSWORD }}
           # python ./test.py  ${{ secrets.TIEBA_USERNAME }} ${{ secrets.TIEBA_PASSWORD }}
-          python ./niuke.py ${{ secrets.NIUKE_USERNAME }} ${{ secrets.NIUKE_PASSWORD }}
+          #python ./niuke.py ${{ secrets.NIUKE_USERNAME }} ${{ secrets.NIUKE_PASSWORD }}
           # python ./ruisi.py ${{ secrets.RUISI_USERNAME }} ${{ secrets.RUISI_PASSWORD }}
