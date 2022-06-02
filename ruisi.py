@@ -9,8 +9,8 @@ img_path = os.getcwd() + "/1.png"
 # 在github上不行，卡死timeout，只能内网登录
 @retry(stop_max_attempt_number=5)
 def ruisi():
+  driver = get_web_driver()
     try:
-        driver = get_web_driver()
         driver.get("http://rs.xidian.edu.cn/member.php?mod=logging&action=login")
         driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/div[1]/table/tbody/tr/td[1]/input").send_keys(username)
         driver.find_element_by_xpath("/html/body/div[6]/div/div[2]/div/div[2]/div[1]/div[1]/form/div/div[2]/table/tbody/tr/td[1]/input").send_keys(password)
